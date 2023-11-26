@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract SupplyChainTracking {
+contract Yagon {
 
     //////////////
     // Objects
@@ -28,7 +28,7 @@ contract SupplyChainTracking {
     }
 
     // Mapping to store information for each product by its ID
-    mapping(uint256 => Product) public products;
+    mapping(uint256 => Product) private products;
 
     //////////////
     // Events
