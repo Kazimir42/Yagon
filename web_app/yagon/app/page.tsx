@@ -43,11 +43,13 @@ export default function Home() {
             } catch (error) {
                 console.error('User denied account access');
             }
-        } else if (window.web3) {
-            // @ts-ignore
-            setWeb3(new Web3(window.web3.currentProvider));
-        } else {
-            console.log('No Ethereum browser extension detected');
+        } else { // @ts-ignore
+            if (window.web3) {
+                // @ts-ignore
+                setWeb3(new Web3(window.web3.currentProvider));
+            } else {
+                console.log('No Ethereum browser extension detected');
+            }
         }
     }
 
@@ -68,7 +70,7 @@ export default function Home() {
     };
 
     return (
-        <main className="bg-main flex min-h-screen flex-col items-center">
+        <main className="flex min-h-screen flex-col items-center">
             <p className={'absolute right-0 p-1 text-gray-600'}>{account ? 'Wallet connected: ' + account : 'No wallet connected'}</p>
             <p className={"text-primary text-xl mt-2"}>Yagon</p>
             <div className={'mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32'}>
@@ -82,14 +84,13 @@ export default function Home() {
                     <input type="text" name="product_id" id="product_id"
                            className="w-full text-2xl font-light rounded-full border border-gray-300 bg-white shadow-lg px-4 text-center py-2"
                            placeholder="Find the product"/>
-
                     <button
                         className={'text-2xl font-light rounded-full bg-primary text-white shadow-lg px-3 py-3 text-center hover:bg-primary hover:bg-opacity-90 transition duration-200'}>
                         <QrCode/>
                     </button>
                 </div>
                 <p className={'text-3xl font-medium'}>OR</p>
-                <Link href={''}
+                <Link href='dashboard/products/new'
                       className={" text-2xl font-light rounded-full bg-primary text-white shadow-lg px-8 text-center py-2 hover:bg-primary hover:bg-opacity-90 transition duration-200"}>
                     Create new one
                 </Link>
