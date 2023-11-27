@@ -3,11 +3,12 @@ import Link from "next/link";
 import QrCode from "@/app/icons/qr-code";
 import {useEffect, useState} from "react";
 import Web3 from 'web3';
+import {smartContractAbi, smartContractAddress} from '@/contract.conf.js'
 
 export default function Home() {
-
     const [web3, setWeb3] = useState(null);
     const [account, setAccount] = useState(null);
+    const [contract, setContract] = useState(null);
 
     useEffect(() => {
         if (!web3) {
@@ -17,7 +18,15 @@ export default function Home() {
 
 
     useEffect(() => {
-        fetchAccount().then(r => console.log('accound fetched'));
+        if (web3) {
+            fetchAccount().then(r => console.log('accound fetched'));
+        }
+    }, [web3]);
+
+    useEffect(() => {
+        if (web3) {
+            initContract().then(r => console.log('contract init'));
+        }
     }, [web3]);
 
 
@@ -47,6 +56,14 @@ export default function Home() {
             // @ts-ignore
             const accounts = await web3.eth.getAccounts();
             setAccount(accounts[0]);
+        }
+    };
+
+    const initContract = async () => {
+        if (web3) {
+            // @ts-ignore
+            const newContract = new web3.eth.Contract(smartContractAbi, smartContractAddress);
+            setContract(newContract);
         }
     };
 
