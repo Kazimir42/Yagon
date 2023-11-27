@@ -12,10 +12,10 @@ export default function Home() {
             </div>
             <div className={'flex flex-col max-w-xl w-full items-center gap-6'}>
                 <input type="text" name="product_id" id="product_id"
-                       className="w-full text-3xl font-light rounded-full border border-gray-300 bg-white shadow-lg px-4 text-center py-2"
+                       className="w-full text-2xl font-light rounded-full border border-gray-300 bg-white shadow-lg px-4 text-center py-2"
                        placeholder="Find the product" />
-                <p className={'text-4xl font-medium'}>OR</p>
-                <Link href={''} className={" text-3xl font-light rounded-full bg-primary text-white shadow-lg px-8 text-center py-2 hover:bg-primary hover:bg-opacity-90 transition duration-200"}>
+                <p className={'text-3xl font-medium'}>OR</p>
+                <Link href={''} className={" text-2xl font-light rounded-full bg-primary text-white shadow-lg px-8 text-center py-2 hover:bg-primary hover:bg-opacity-90 transition duration-200"}>
                     Create new one
                 </Link>
             </div>
