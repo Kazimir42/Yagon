@@ -90,7 +90,7 @@ export default function Home() {
                     </button>
                 </div>
                 <p className={'text-3xl font-medium'}>OR</p>
-                <Link href='dashboard/products/new'
+                <Link href='products/new'
                       className={" text-2xl font-light rounded-full bg-primary text-white shadow-lg px-8 text-center py-2 hover:bg-primary hover:bg-opacity-90 transition duration-200"}>
                     Create new one
                 </Link>

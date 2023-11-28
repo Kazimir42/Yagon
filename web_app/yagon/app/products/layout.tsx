@@ -1,4 +1,4 @@
-import DashboardLayout from './DashboardLayout'
+import ProductLayout from './ProductLayout'
 import {Metadata} from "next";
 
 
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 // @ts-ignore
 export default function Layout({ children }) {
-    return <DashboardLayout>{children}</DashboardLayout>
+    return <ProductLayout>{children}</ProductLayout>
 }
