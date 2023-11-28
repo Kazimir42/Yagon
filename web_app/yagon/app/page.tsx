@@ -6,16 +6,14 @@ import {useRef} from "react";
 import { useRouter } from 'next/navigation'
 
 export default function Home() {
-    // @ts-ignore
-    const {account, getProduct} = useCrypto();
-    const inputRef = useRef(0);
+    const {account} = useCrypto();
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const router = useRouter()
 
     // @ts-ignore
     const handleSubmit = (e) => {
         e.preventDefault()
-        // @ts-ignore
-        router.push('products/' + inputRef.current.value);
+        router.push('products/' + inputRef.current?.value);
     }
 
     return (

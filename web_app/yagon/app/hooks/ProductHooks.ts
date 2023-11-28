@@ -1,7 +1,6 @@
 export const useProduct = (contract: any) => {
-    // @ts-ignore
 
-    const getProduct = async (productId: number) => {
+    const getProduct = async (productId: string | string[]) => {
         try {
             let product = await contract.methods.getProduct(productId).call();
             return parseProduct(product);

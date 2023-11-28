@@ -4,8 +4,16 @@ import {useCrypto} from "@/app/contexts/CryptoContext";
 import {useParams} from "next/navigation";
 import {useProduct} from "@/app/hooks/ProductHooks";
 
+interface ProductState {
+    id: number;
+    name: string,
+    manufacturingDate: number,
+    manufacturingLocation: string,
+    numberOfMovements: number,
+}
+
 function Page() {
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState<ProductState | null>(null);
     const params = useParams()
 
     const {contract, account} = useCrypto();
@@ -13,7 +21,6 @@ function Page() {
 
     useEffect(() => {
         if (contract) {
-            // @ts-ignore
             getProduct(params.id).then((product) => {
                 setProduct(product)
             })
