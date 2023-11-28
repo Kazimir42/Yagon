@@ -1,19 +1,20 @@
-import type { Metadata } from 'next'
+import type {Metadata} from 'next'
 import './globals.css'
+import {CryptoProvider} from "@/app/contexts/CryptoContext";
 
 export const metadata: Metadata = {
-  title: 'Yagon',
-  description: '',
+    title: 'Yagon',
+    description: '',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
+export default function RootLayout({children,}: {
+    children: React.ReactNode
 }) {
-  return (
-    <html lang="en">
-      <body className={'font-sans bg-main'}>{children}</body>
-    </html>
-  )
+    return (
+        <CryptoProvider>
+            <html lang="en">
+            <body className={'font-sans bg-main'}>{children}</body>
+            </html>
+        </CryptoProvider>
+    )
 }

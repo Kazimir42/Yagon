@@ -1,73 +1,22 @@
 "use client";
 import Link from "next/link";
 import QrCode from "@/app/icons/qr-code";
-import {useEffect, useState} from "react";
-import Web3 from 'web3';
-import {smartContractAbi, smartContractAddress} from '@/contract.conf.js'
+import {useCrypto} from "@/app/contexts/CryptoContext";
+import {useRef} from "react";
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
-    const [web3, setWeb3] = useState(null);
-    const [account, setAccount] = useState(null);
-    const [contract, setContract] = useState(null);
+    // @ts-ignore
+    const {account} = useCrypto();
+    const inputRef = useRef(0);
+    const router = useRouter()
 
-    useEffect(() => {
-        if (!web3) {
-            initWeb3().then(r => console.log('web3 connected'))
-        }
-    }, [web3]);
-
-
-    useEffect(() => {
-        if (web3) {
-            fetchAccount().then(r => console.log('accound fetched'));
-        }
-    }, [web3]);
-
-    useEffect(() => {
-        if (web3) {
-            initContract().then(r => console.log('contract init'));
-        }
-    }, [web3]);
-
-
-    const initWeb3 = async () => {
+    // @ts-ignore
+    const handleSubmit = (e) => {
+        e.preventDefault()
         // @ts-ignore
-        if (window.ethereum) {
-            // @ts-ignore
-            const newWeb3 = new Web3(window.ethereum);
-            try {
-                // @ts-ignore
-                await window.ethereum.request({method: 'eth_requestAccounts'});
-                // @ts-ignore
-                setWeb3(newWeb3);
-            } catch (error) {
-                console.error('User denied account access');
-            }
-        } else { // @ts-ignore
-            if (window.web3) {
-                // @ts-ignore
-                setWeb3(new Web3(window.web3.currentProvider));
-            } else {
-                console.log('No Ethereum browser extension detected');
-            }
-        }
+        router.push('products/' + inputRef.current.value);
     }
-
-    const fetchAccount = async () => {
-        if (web3) {
-            // @ts-ignore
-            const accounts = await web3.eth.getAccounts();
-            setAccount(accounts[0]);
-        }
-    };
-
-    const initContract = async () => {
-        if (web3) {
-            // @ts-ignore
-            const newContract = new web3.eth.Contract(smartContractAbi, smartContractAddress);
-            setContract(newContract);
-        }
-    };
 
     return (
         <main className="flex min-h-screen flex-col items-center">
@@ -80,15 +29,15 @@ export default function Home() {
                 </div>
             </div>
             <div className={'flex flex-col max-w-xl w-full items-center gap-6 p-4'}>
-                <div className={'flex flex-row gap-2 w-full items-center'}>
-                    <input type="text" name="product_id" id="product_id"
+                <form className={'flex flex-row gap-2 w-full items-center'} onSubmit={handleSubmit}>
+                    <input ref={inputRef} type="text" name="product_id" id="product_id"
                            className="w-full text-2xl font-light rounded-full border border-gray-300 bg-white shadow-lg px-4 text-center py-2"
                            placeholder="Find the product"/>
                     <button
                         className={'text-2xl font-light rounded-full bg-primary text-white shadow-lg px-3 py-3 text-center hover:bg-primary hover:bg-opacity-90 transition duration-200'}>
                         <QrCode/>
                     </button>
-                </div>
+                </form>
                 <p className={'text-3xl font-medium'}>OR</p>
                 <Link href='products/new'
                       className={" text-2xl font-light rounded-full bg-primary text-white shadow-lg px-8 text-center py-2 hover:bg-primary hover:bg-opacity-90 transition duration-200"}>
@@ -96,5 +45,5 @@ export default function Home() {
                 </Link>
             </div>
         </main>
-    )
+    );
 }

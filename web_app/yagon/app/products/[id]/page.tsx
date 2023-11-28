@@ -1,11 +1,19 @@
-import React from 'react';
-import {getProduct} from "@/app/route-eth";
+"use client";
+import React, {useEffect, useState} from 'react';
+import {useCrypto} from "@/app/contexts/CryptoContext";
+import {useParams} from "next/navigation";
 
 function Page() {
+    const [product, setProduct] = useState(null);
+    const params = useParams()
 
-    function findProduct() {
-        //getProduct(web3, contract, 1).then(r => )
-    }
+
+    // @ts-ignore
+    const { getProduct } = useCrypto();
+
+    useEffect(() => {
+        getProduct(params.id).then((product: React.SetStateAction<null>) => setProduct(product))
+    }, []);
 
     return (
         <div>Product id</div>
