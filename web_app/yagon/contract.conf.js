@@ -1,4 +1,4 @@
-export const smartContractAddress = '0xF6d838211AA3B1e82Ae3490697a0e8aceDf64044';
+export const smartContractAddress = '0x7b03241ad0e4a2b0cf407e127ab635a18c61a643';
 
 export const smartContractAbi = [
   {

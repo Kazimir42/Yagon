@@ -2,21 +2,33 @@
 import React, {useEffect, useState} from 'react';
 import {useCrypto} from "@/app/contexts/CryptoContext";
 import {useParams} from "next/navigation";
+import {useProduct} from "@/app/hooks/ProductHooks";
 
 function Page() {
     const [product, setProduct] = useState(null);
     const params = useParams()
 
-
-    // @ts-ignore
-    const { getProduct } = useCrypto();
+    const {contract, account} = useCrypto();
+    const {getProduct} = useProduct(contract);
 
     useEffect(() => {
-        getProduct(params.id).then((product: React.SetStateAction<null>) => setProduct(product))
-    }, []);
+        if (contract) {
+            // @ts-ignore
+            getProduct(params.id).then((product) => {
+                setProduct(product)
+            })
+        }
+    }, [contract]);
 
     return (
-        <div>Product id</div>
+        <div>
+            <p className={'absolute right-0 p-1 text-gray-600'}>{account ? 'Wallet connected: ' + account : 'No wallet connected'}</p>
+            <div>Product id : {product?.id}</div>
+            <div>Product name : {product?.name}</div>
+            <div>Product manufacturingDate : {product?.manufacturingDate}</div>
+            <div>Product manufacturingLocation : {product?.manufacturingLocation}</div>
+            <div>Product numberOfMovements : {product?.numberOfMovements}</div>
+        </div>
     );
 }
 

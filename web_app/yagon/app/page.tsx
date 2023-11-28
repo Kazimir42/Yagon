@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 
 export default function Home() {
     // @ts-ignore
-    const {account} = useCrypto();
+    const {account, getProduct} = useCrypto();
     const inputRef = useRef(0);
     const router = useRouter()
 
