@@ -12,6 +12,7 @@ interface ProductState {
     name: string,
     manufacturingDate: number,
     manufacturingLocation: string,
+    movements: any,
     numberOfMovements: number,
     description: string,
 }
@@ -43,9 +44,9 @@ function Page() {
 
     return (
         <div>
-            <div id={'product' + params.id}>
+            <div id={'product' + params.id} className={'max-w-2xl mx-auto flex flex-col gap-4'}>
                 <div id={'card'}
-                     className={'flex flex-row max-w-2xl mt-8 gap-6 mx-auto p-6 bg-white rounded-xl shadow-xl'}>
+                     className={'flex flex-row mt-8 gap-6 mx-auto p-6 bg-white rounded-xl shadow-xl w-full'}>
                     <div className={'w-64'}>
                         <QRCode
                             class={'rounded'}
@@ -75,10 +76,20 @@ function Page() {
                     </div>
                 </div>
 
+                <div id={'movements'} className={'w-full'}>
+                    <h2 className={'text-2xl font-semibold text-gray-600'}>Create new movement</h2>
+                    <div id={'new_movement bg-white rounded-xl shadow-xl'}>
+                        <form>
 
+                        </form>
+                    </div>
+
+                    <h2 className={'text-2xl font-semibold text-gray-600'}>All movements</h2>
+                    <div id={'bg-white rounded-xl shadow-xl'}>
+
+                    </div>
+                </div>
             </div>
-
-
         </div>
     );
 
