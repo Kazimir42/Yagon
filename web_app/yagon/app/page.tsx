@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import QrCode from "@/app/icons/qr-code";
 import {useCrypto} from "@/app/contexts/CryptoContext";
-import {useRef} from "react";
+import React, {useRef} from "react";
 import { useRouter } from 'next/navigation'
+import Search from "@/app/components/Product/Search";
 
 export default function Home() {
     const {account} = useCrypto();
@@ -27,15 +27,7 @@ export default function Home() {
                 </div>
             </div>
             <div className={'flex flex-col max-w-xl w-full items-center gap-6 p-4'}>
-                <form className={'flex flex-row gap-2 w-full items-center'} onSubmit={handleSubmit}>
-                    <input ref={inputRef} type="text" name="product_id" id="product_id"
-                           className="w-full text-2xl font-light rounded-full border border-gray-300 bg-white shadow-lg px-4 text-center py-2"
-                           placeholder="Find the product"/>
-                    <button
-                        className={'text-2xl font-light rounded-full bg-primary text-white shadow-lg px-3 py-3 text-center hover:bg-primary hover:bg-opacity-90 transition duration-200'}>
-                        <QrCode/>
-                    </button>
-                </form>
+                <Search />
                 <p className={'text-3xl font-medium'}>OR</p>
                 <Link href='products/new'
                       className={" text-2xl font-light rounded-full bg-primary text-white shadow-lg px-8 text-center py-2 hover:bg-primary hover:bg-opacity-90 transition duration-200"}>
