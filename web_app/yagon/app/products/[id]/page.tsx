@@ -3,6 +3,8 @@ import React, {useEffect, useState} from 'react';
 import {useCrypto} from "@/app/contexts/CryptoContext";
 import {useParams} from "next/navigation";
 import {useProduct} from "@/app/hooks/ProductHooks";
+import Loader from "@/app/components/Loader";
+import NoResult from "@/app/components/NoResult";
 
 interface ProductState {
     id: number;
@@ -13,6 +15,7 @@ interface ProductState {
 }
 
 function Page() {
+    const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState<ProductState | null>(null);
     const params = useParams()
 
@@ -23,20 +26,34 @@ function Page() {
         if (contract) {
             getProduct(params.id).then((product) => {
                 setProduct(product)
+                setIsLoading(false)
             })
         }
     }, [contract]);
 
+    if (isLoading) {
+        return <Loader/>
+    }
+
+    if (!isLoading && !product?.id) {
+        return <NoResult/>
+    }
+    
     return (
         <div>
-            <p className={'absolute right-0 p-1 text-gray-600'}>{account ? 'Wallet connected: ' + account : 'No wallet connected'}</p>
-            <div>Product id : {product?.id}</div>
-            <div>Product name : {product?.name}</div>
-            <div>Product manufacturingDate : {product?.manufacturingDate}</div>
-            <div>Product manufacturingLocation : {product?.manufacturingLocation}</div>
-            <div>Product numberOfMovements : {product?.numberOfMovements}</div>
+            <div id={'product' + params.id}>
+                <div>Product id : {product?.id}</div>
+                <div>Product name : {product?.name}</div>
+                <div>Product manufacturingDate : {product?.manufacturingDate}</div>
+                <div>Product manufacturingLocation : {product?.manufacturingLocation}</div>
+                <div>Product numberOfMovements : {product?.numberOfMovements}</div>
+            </div>
+
+
         </div>
     );
+
+
 }
 
 export default Page;
