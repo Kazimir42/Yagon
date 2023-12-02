@@ -1,5 +1,6 @@
 export const useProduct = (contract: any, account: any) => {
 
+    // Product id for tests = 0x67623ba03618b99a90621767d57e073b2f00d69ce0d4f59b3f54ac222ad0432a
     const getProduct = async (productId: string | string[]) => {
         try {
             let product = await contract.methods.getProduct(productId).call();

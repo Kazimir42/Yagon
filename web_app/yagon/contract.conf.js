@@ -1,75 +1,26 @@
-export const smartContractAddress = '0x7b03241ad0e4a2b0cf407e127ab635a18c61a643';
+export const smartContractAddress = '0x77265F537bdFddD5A0A2eC0c70BC77F2CDd4f650';
 
 export const smartContractAbi = [
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_product_id",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_date",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_location",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_description",
-        "type": "string"
-      }
-    ],
-    "name": "createMovement",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_id",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_name",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "_manufacturingLocation",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_manufacturingDate",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_description",
-        "type": "string"
-      }
-    ],
-    "name": "createProduct",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
   {
     "anonymous": false,
     "inputs": [
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "bytes32",
         "name": "productId",
-        "type": "uint256"
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "movementId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
       },
       {
         "indexed": false,
@@ -82,6 +33,24 @@ export const smartContractAbi = [
         "internalType": "string",
         "name": "location",
         "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "createdBy",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "createdAt",
+        "type": "uint256"
       }
     ],
     "name": "MovementCreated",
@@ -92,9 +61,9 @@ export const smartContractAbi = [
     "inputs": [
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "bytes32",
         "name": "id",
-        "type": "uint256"
+        "type": "bytes32"
       },
       {
         "indexed": false,
@@ -119,6 +88,18 @@ export const smartContractAbi = [
         "internalType": "string",
         "name": "description",
         "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "createdBy",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "createdAt",
+        "type": "uint256"
       }
     ],
     "name": "ProductCreated",
@@ -127,17 +108,146 @@ export const smartContractAbi = [
   {
     "inputs": [
       {
+        "internalType": "bytes32",
+        "name": "_product_id",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
         "internalType": "uint256",
-        "name": "_id",
+        "name": "_date",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_location",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      }
+    ],
+    "name": "createMovement",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_manufacturingLocation",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_manufacturingDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      }
+    ],
+    "name": "createProduct",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_productId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMovements",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "id",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "date",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "createdBy",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "createdAt",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct Yagon.Movement[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_id",
+        "type": "bytes32"
       }
     ],
     "name": "getProduct",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "bytes32",
         "name": "id",
-        "type": "uint256"
+        "type": "bytes32"
       },
       {
         "internalType": "string",
