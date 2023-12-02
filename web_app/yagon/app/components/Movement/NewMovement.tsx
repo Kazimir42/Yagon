@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Modal from "@/app/components/Generic/Modal";
 import {useCrypto} from "@/app/contexts/CryptoContext";
 import {useProduct} from "@/app/hooks/ProductHooks";
+import Loader from "@/app/components/Loader";
 
 function NewMovement({product}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,11 +17,13 @@ function NewMovement({product}) {
         setIsLoading(true);
         createMovement(product.id, e.target.elements.title.value, e.target.elements.date.value, e.target.elements.location.value, e.target.elements.description.value).then(r => {
             setIsLoading(false);
+            setIsModalOpen(false);
+            //todo handle status
             setStatus('Movement sent, comeback soon to view it')
         }).catch((e) => {
             setIsLoading(false);
+            //todo handle status
             setStatus('Error')
-
         })
 
     }
@@ -37,6 +40,7 @@ function NewMovement({product}) {
             </div>
             {isModalOpen ?
                 <Modal title={'New movement'} setIsOpen={setIsModalOpen} isOpen={isModalOpen}>
+                    {isLoading ? <div className={'absolute bg-black/30 top-0 left-0 rounded-2xl w-full h-full pt-48'}><Loader /></div> : ''}
                     <form className={'mt-4 grid grid-cols-2 gap-4'} onSubmit={handleSubmit}>
                         <div className={'col-span-2'}>
                             <label htmlFor="title" className="block font-medium leading-6 text-gray-600">

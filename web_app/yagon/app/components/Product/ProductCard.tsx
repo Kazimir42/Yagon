@@ -2,6 +2,7 @@ import React from 'react';
 import QRCode from "react-qr-code";
 
 function ProductCard({product}) {
+
     return (
         <div id={'card'}
              className={'flex flex-row mt-8 gap-6 mx-auto p-6 bg-white rounded-xl shadow-xl w-full'}>

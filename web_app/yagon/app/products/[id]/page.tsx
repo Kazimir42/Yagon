@@ -26,7 +26,7 @@ function Page() {
     const params = useParams()
 
     const {contract, account} = useCrypto();
-    const {getProduct} = useProduct(contract);
+    const {getProduct} = useProduct(contract, account);
 
     useEffect(() => {
         if (contract) {
@@ -38,7 +38,7 @@ function Page() {
     }, [contract]);
 
     if (isLoading) {
-        return <Loader/>
+        return <div className={'w-full mt-64'}><Loader/></div>
     }
 
     if (!isLoading && !product?.id) {
@@ -48,12 +48,12 @@ function Page() {
     return (
         <div>
             <div id={'product' + params.id} className={'max-w-2xl mx-auto flex flex-col gap-8'}>
-                <ProductCard product={product} />
+                <ProductCard product={product}/>
 
                 <div id={'movements'} className={'w-full'}>
                     <h2 className={'text-3xl font-semibold text-gray-600 mb-8'}>All movements</h2>
-                    <NewMovement product={product} />
-                    <MovementTimeline movements={product?.movements} />
+                    <NewMovement product={product}/>
+                    <MovementTimeline movements={product?.movements}/>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ export const useProduct = (contract: any, account: any) => {
     const getProduct = async (productId: string | string[]) => {
         try {
             let product = await contract.methods.getProduct(productId).call();
+            console.log(product)
             return parseProduct(product);
         } catch (error) {
             console.error('Error fetching product', error);
@@ -21,13 +22,6 @@ export const useProduct = (contract: any, account: any) => {
 
     return { getProduct, createMovement};
 };
-
-interface ProductState {
-    data: any | null;
-    loading: boolean;
-    error: string | null;
-}
-
 
 const parseProduct = (product: any) => {
     const parsedProduct: any = {};
