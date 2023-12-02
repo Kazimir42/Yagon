@@ -47,7 +47,7 @@ function Page() {
 
     return (
         <div>
-            <div id={'product' + params.id} className={'max-w-2xl mx-auto flex flex-col gap-8'}>
+            <div id={'product_' + params.id} className={'max-w-2xl mx-auto flex flex-col gap-8'}>
                 <ProductCard product={product}/>
 
                 <div id={'movements'} className={'w-full'}>

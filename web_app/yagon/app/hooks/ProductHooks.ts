@@ -4,7 +4,9 @@ export const useProduct = (contract: any, account: any) => {
     const getProduct = async (productId: string | string[]) => {
         try {
             let product = await contract.methods.getProduct(productId).call();
-            console.log(product)
+            if (product.id == '0x0000000000000000000000000000000000000000000000000000000000000000') {
+                throw new Error('Product not found')
+            }
             return parseProduct(product);
         } catch (error) {
             console.error('Error fetching product', error);
@@ -29,6 +31,11 @@ const parseProduct = (product: any) => {
     for (const key in product) {
         if (product.hasOwnProperty(key)) {
             parsedProduct[key] = parseValue(product[key]);
+
+            // Timestamp to date string
+            if (key == 'manufacturingDate') {
+                parsedProduct[key] = new Date(parsedProduct[key]).toLocaleString("en-US")
+            }
         }
     }
     return parsedProduct;

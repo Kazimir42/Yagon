@@ -4,32 +4,31 @@ import QRCode from "react-qr-code";
 function ProductCard({product}) {
 
     return (
-        <div id={'card'}
-             className={'flex flex-row mt-8 gap-6 mx-auto p-6 bg-white rounded-xl shadow-xl w-full'}>
-            <div className={'w-64'}>
+        <div id={'card'} className={'flex flex-row flex-nowrap mt-8 gap-6 mx-auto p-6 bg-white rounded-xl shadow-xl w-full'}>
+            <div className={'grow'}>
                 <QRCode
                     className={'rounded'}
                     value={'test'}
                     viewBox={`0 0 256 256`}
                 />
             </div>
-            <div className={'text-gray-600'}>
-                <h1 className={'text-3xl font-semibold mb-4'}>{product?.name}</h1>
+            <div className={'text-gray-600 w-full'}>
+                <h1 className={'text-3xl font-semibold mb-4 break-words'}>{product?.name}</h1>
 
                 <p>
-                    Id : {product?.id}
+                    <span className={'font-bold'}>Id :</span> {product?.id}
                 </p>
                 <p>
-                    Manufacturing date : {product?.manufacturingDate}
+                    <span className={'font-bold'}>Manufacturing date :</span> {product?.manufacturingDate}
                 </p>
                 <p>
-                    Manufacturing location : {product?.manufacturingLocation}
+                    <span className={'font-bold'}>Manufacturing location :</span> {product?.manufacturingLocation}
                 </p>
                 <p>
-                    Number of movements : {product?.numberOfMovements}
+                    <span className={'font-bold'}>Number of movements :</span> {product?.numberOfMovements}
                 </p>
                 <p>
-                    Description : {product?.description}
+                    <span className={'font-bold'}>Description :</span> {product?.description}
                 </p>
             </div>
         </div>
