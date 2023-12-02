@@ -1,7 +1,7 @@
 'use client'
 
 import {CryptoProvider} from "@/app/contexts/CryptoContext";
-import Header from "@/app/components/Product/Header";
+import ProductHeader from "@/app/components/Product/ProductHeader";
 import {useParams} from "next/navigation";
 
 // @ts-ignore
@@ -12,7 +12,7 @@ export default function ProductLayout({children}) {
         <CryptoProvider>
             <html lang="en">
                 <body className={'font-sans bg-main'}>
-                    <Header searchTerm={params.id} />
+                    <ProductHeader searchTerm={params.id} />
                     {children}
                 </body>
             </html>

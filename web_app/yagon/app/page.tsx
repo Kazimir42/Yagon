@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useCrypto} from "@/app/contexts/CryptoContext";
 import React, {useRef} from "react";
 import { useRouter } from 'next/navigation'
-import Search from "@/app/components/Product/Search";
+import SearchProduct from "@/app/components/Product/SearchProduct";
 
 export default function Home() {
     const {account} = useCrypto();
@@ -27,7 +27,7 @@ export default function Home() {
                 </div>
             </div>
             <div className={'flex flex-col max-w-xl w-full items-center gap-6 p-4'}>
-                <Search />
+                <SearchProduct />
                 <p className={'text-3xl font-medium'}>OR</p>
                 <Link href='products/new'
                       className={" text-2xl font-light rounded-full bg-primary text-white shadow-lg px-8 text-center py-2 hover:bg-primary hover:bg-opacity-90 transition duration-200"}>

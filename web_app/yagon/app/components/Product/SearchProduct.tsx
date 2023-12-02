@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import QrCode from "@/app/icons/qr-code";
 import {useRouter} from "next/navigation";
 
-function Search(props: {
+function SearchProduct(props: {
     defaultValue: string | number | readonly string[] | undefined;
 }) {
 
@@ -28,4 +28,4 @@ function Search(props: {
     );
 }
 
-export default Search;
+export default SearchProduct;
