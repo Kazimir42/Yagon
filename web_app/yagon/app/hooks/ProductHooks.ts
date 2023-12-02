@@ -1,4 +1,4 @@
-export const useProduct = (contract: any) => {
+export const useProduct = (contract: any, account: any) => {
 
     const getProduct = async (productId: string | string[]) => {
         try {
@@ -9,7 +9,17 @@ export const useProduct = (contract: any) => {
         }
     };
 
-    return { getProduct };
+    const createMovement = async (productId: number, title: string, date: string, location: string, description: string) => {
+        const timestamp = Date.parse(date)
+
+        try {
+            return await contract.methods.createMovement(productId, timestamp, location, description).send({from: account});
+        } catch (error) {
+            console.error('Error when createing movement', error);
+        }
+    };
+
+    return { getProduct, createMovement};
 };
 
 interface ProductState {

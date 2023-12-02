@@ -7,7 +7,7 @@ function ProductCard({product}) {
              className={'flex flex-row mt-8 gap-6 mx-auto p-6 bg-white rounded-xl shadow-xl w-full'}>
             <div className={'w-64'}>
                 <QRCode
-                    class={'rounded'}
+                    className={'rounded'}
                     value={'test'}
                     viewBox={`0 0 256 256`}
                 />

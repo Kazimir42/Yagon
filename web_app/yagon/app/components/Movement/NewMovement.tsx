@@ -1,29 +1,50 @@
 import React, {useState} from 'react';
 import Modal from "@/app/components/Generic/Modal";
+import {useCrypto} from "@/app/contexts/CryptoContext";
+import {useProduct} from "@/app/hooks/ProductHooks";
 
 function NewMovement({product}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [status, setStatus] = useState('');
 
+    const {contract, account} = useCrypto();
+    const {createMovement} = useProduct(contract, account);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        createMovement(product.id, e.target.elements.title.value, e.target.elements.date.value, e.target.elements.location.value, e.target.elements.description.value).then(r => {
+            setIsLoading(false);
+            setStatus('Movement sent, comeback soon to view it')
+        }).catch((e) => {
+            setIsLoading(false);
+            setStatus('Error')
+
+        })
+
+    }
 
     return (
         <>
             <div id={'new_movement'} onClick={() => setIsModalOpen(true)}
                  className={' rounded-xl border-2 border-primary p-8 border-dashed duration-300 hover:cursor-pointer hover:shadow-xl text-gray-400 hover:text-primary mb-8'}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2"
                      stroke="currentColor" className="w-10 h-10 mx-auto">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
                 </svg>
                 <h2 className={'text-xl font-semibold text-center'}>Add new</h2>
             </div>
             {isModalOpen ?
                 <Modal title={'New movement'} setIsOpen={setIsModalOpen} isOpen={isModalOpen}>
-                    <form className={'mt-4 grid grid-cols-2 gap-4'}>
+                    <form className={'mt-4 grid grid-cols-2 gap-4'} onSubmit={handleSubmit}>
                         <div className={'col-span-2'}>
                             <label htmlFor="title" className="block font-medium leading-6 text-gray-600">
                                 Title
                             </label>
                             <div className="mt-1">
                                 <input
+                                    required={true}
                                     type="text"
                                     name="title"
                                     id="title"
@@ -38,6 +59,7 @@ function NewMovement({product}) {
                             </label>
                             <div className="mt-1">
                                 <input
+                                    required={true}
                                     type="datetime-local"
                                     name="date"
                                     id="date"
@@ -52,6 +74,7 @@ function NewMovement({product}) {
                             </label>
                             <div className="mt-1">
                                 <input
+                                    required={true}
                                     type="text"
                                     name="location"
                                     id="location"
@@ -72,7 +95,9 @@ function NewMovement({product}) {
                                 </textarea>
                             </div>
                         </div>
-                        <input type={'submit'} className={"col-span-2 font-light rounded-xl bg-primary text-white shadow-lg px-2 text-center py-2 hover:bg-primary hover:bg-opacity-90 transition duration-200"} value={'Create'} />
+                        <input type={'submit'}
+                               className={"col-span-2 font-light rounded-xl bg-primary text-white shadow-lg px-2 text-center py-2 hover:bg-primary hover:bg-opacity-90 hover:cursor-pointer transition duration-200"}
+                               value={'Create'}/>
                     </form>
                 </Modal>
                 : ''}
