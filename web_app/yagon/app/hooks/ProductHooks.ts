@@ -7,6 +7,7 @@ export const useProduct = (contract: any, account: any) => {
             if (product.id == '0x0000000000000000000000000000000000000000000000000000000000000000') {
                 throw new Error('Product not found')
             }
+
             return parseProduct(product);
         } catch (error) {
             console.error('Error fetching product', error);

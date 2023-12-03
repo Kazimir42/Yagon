@@ -105,7 +105,9 @@ contract Yagon {
         string memory manufacturingLocation,
         uint256 manufacturingDate,
         string memory description,
-        uint256 numberOfMovements
+        uint256 numberOfMovements,
+        address createdBy,
+        uint256 createdAt
     ) {
         Product storage product = products[_id];
         return (
@@ -114,7 +116,9 @@ contract Yagon {
             product.manufacturingLocation,
             product.manufacturingDate,
             product.description,
-            product.numberOfMovements
+            product.numberOfMovements,
+            product.createdBy,
+            product.createdAt
         );
     }
 
