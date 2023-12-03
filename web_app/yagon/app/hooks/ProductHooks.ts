@@ -17,10 +17,15 @@ export const useProduct = (contract: any, account: any) => {
     const getMovements = async (productId: string | string[]) => {
         try {
             let movements = await contract.methods.getMovements(productId).call();
-            console.log(movements)
-            return movements;
+
+            let parsedMovements: any[] = [];
+            movements.forEach((movement: any) => {
+                parsedMovements.push(parseMovement(movement))
+            })
+
+            return parsedMovements;
         } catch (error) {
-            console.error('Error fetching product', error);
+            console.error('Error fetching movements', error);
         }
     };
 

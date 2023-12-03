@@ -58,9 +58,9 @@ function Page() {
                 <ProductCard product={product}/>
 
                 <div id={'movements'} className={'w-full'}>
-                    <h2 className={'text-3xl font-semibold text-gray-600 mb-8'}>All movements</h2>
+                    <h2 className={'text-3xl font-semibold text-gray-600 mb-4'}>All movements</h2>
                     <NewMovement product={product}/>
-                    <MovementTimeline movements={product?.movements}/>
+                    <MovementTimeline movements={movements}/>
                 </div>
             </div>
         </div>

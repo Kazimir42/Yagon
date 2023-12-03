@@ -13,7 +13,7 @@ function ProductHeader(props: {
                 <div className={'ml-auto'}>
                     <Link href='products/new'
                           className={"text-xl font-light rounded-full bg-primary text-white shadow-lg px-8 text-center py-3 hover:bg-primary hover:bg-opacity-90 transition duration-200"}>
-                        Create new one
+                        New Product
                     </Link>
                 </div>
             </div>
