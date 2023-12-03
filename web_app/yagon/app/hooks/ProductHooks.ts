@@ -37,7 +37,25 @@ export const useProduct = (contract: any, account: any) => {
         }
     };
 
-    return { getProduct, createMovement, getMovements};
+    const createProduct = async (name: string, manufacturingLocation: string, manufacturingDate: string, description: string) => {
+        try {
+            const result = await contract.methods.createProduct(name, manufacturingLocation, Date.parse(manufacturingDate), description).send({ from: account });
+
+            const events = await contract.getPastEvents('ProductCreated', { filter: { createdBy: account } });
+
+            if (events.length > 0) {
+                const productId = events[0].returnValues.id;
+                console.log('Product created with ID:', productId);
+                return productId;
+            } else {
+                console.error('Product creation event not found in transaction events.');
+            }
+        } catch (error) {
+            console.error('Error when creating product', error);
+        }
+    };
+
+    return { createProduct, getProduct, createMovement, getMovements};
 };
 
 const parseProduct = (product: any) => {

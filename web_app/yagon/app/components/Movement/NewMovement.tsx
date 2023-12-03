@@ -3,12 +3,14 @@ import Modal from "@/app/components/Generic/Modal";
 import {useCrypto} from "@/app/contexts/CryptoContext";
 import {useProduct} from "@/app/hooks/ProductHooks";
 import Loader from "@/app/components/Loader";
+import {useRouter} from "next/navigation";
 
 function NewMovement({product}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState('');
 
+    const router = useRouter()
     const {contract, account} = useCrypto();
     const {createMovement} = useProduct(contract, account);
 
@@ -18,14 +20,12 @@ function NewMovement({product}) {
         createMovement(product.id, e.target.elements.name.value, e.target.elements.date.value, e.target.elements.location.value, e.target.elements.description.value).then(r => {
             setIsLoading(false);
             setIsModalOpen(false);
-            //todo handle status
-            setStatus('Movement sent, comeback soon to view it')
+            window.location.reload();
         }).catch((e) => {
             setIsLoading(false);
             //todo handle status
             setStatus('Error')
         })
-
     }
 
     return (

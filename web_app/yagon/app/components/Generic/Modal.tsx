@@ -1,5 +1,6 @@
 import React from 'react';
 
+// @ts-ignore
 function Modal({title, children, isOpen, setIsOpen}) {
     return (
         <div className={'bg-black/50 absolute top-0 left-0 w-full h-full flex flex-col overflow-hidden z-50'}>

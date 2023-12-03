@@ -7,14 +7,6 @@ import SearchProduct from "@/app/components/Product/SearchProduct";
 
 export default function Home() {
     const {account} = useCrypto();
-    const inputRef = useRef<HTMLInputElement | null>(null);
-    const router = useRouter()
-
-    // @ts-ignore
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        router.push('products/' + inputRef.current?.value);
-    }
 
     return (
         <main className="flex min-h-screen flex-col items-center">
@@ -27,7 +19,7 @@ export default function Home() {
                 </div>
             </div>
             <div className={'flex flex-col max-w-xl w-full items-center gap-6 p-4'}>
-                <SearchProduct />
+                <SearchProduct defaultValue={''}/>
                 <p className={'text-3xl font-medium'}>OR</p>
                 <Link href='products/new'
                       className={"text-2xl font-light rounded-full bg-primary text-white shadow-lg px-8 text-center py-2 hover:bg-primary hover:bg-opacity-90 transition duration-200"}>
