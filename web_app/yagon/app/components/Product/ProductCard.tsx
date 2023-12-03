@@ -30,7 +30,7 @@ function ProductCard({product}) {
 
                 <div>
                     <h2 className={'font-bold'}>Number of movements</h2>
-                    <p className={'break-words'}>{product?.numberOfMovements}</p>
+                    <p className={'break-words'}>{product?.movementIds.length}</p>
                 </div>
 
                 <div>

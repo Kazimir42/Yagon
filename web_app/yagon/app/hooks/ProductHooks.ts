@@ -42,12 +42,27 @@ const parseProduct = (product: any) => {
             parsedProduct[key] = parseValue(product[key]);
 
             // Timestamp to date string
-            if (key == 'manufacturingDate') {
+            if (['manufacturingDate', 'createdAt'].includes(key)) {
                 parsedProduct[key] = new Date(parsedProduct[key]).toLocaleString("en-US")
             }
         }
     }
     return parsedProduct;
+};
+
+const parseMovement = (movement: any) => {
+    const parsedMovement: any = {};
+    for (const key in movement) {
+        if (movement.hasOwnProperty(key)) {
+            parsedMovement[key] = parseValue(movement[key]);
+
+            // Timestamp to date string
+            if (['date', 'createdAt'].includes(key)) {
+                parsedMovement[key] = new Date(parsedMovement[key]).toLocaleString("en-US")
+            }
+        }
+    }
+    return parsedMovement;
 };
 
 const parseValue = (value: any) => {

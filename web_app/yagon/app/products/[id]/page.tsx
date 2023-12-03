@@ -15,7 +15,7 @@ interface ProductState {
     manufacturingDate: number,
     manufacturingLocation: string,
     movements: any,
-    numberOfMovements: number,
+    movementIds: [],
     description: string,
     createdAt: number,
     createdBy: string,
