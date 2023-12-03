@@ -14,11 +14,9 @@ export const useProduct = (contract: any, account: any) => {
         }
     };
 
-    const createMovement = async (productId: number, title: string, date: string, location: string, description: string) => {
-        const timestamp = Date.parse(date)
-
+    const createMovement = async (productId: number, name: string, date: string, location: string, description: string) => {
         try {
-            return await contract.methods.createMovement(productId, timestamp, location, description).send({from: account});
+            return await contract.methods.createMovement(productId, name, Date.parse(date), location, description).send({from: account});
         } catch (error) {
             console.error('Error when createing movement', error);
         }

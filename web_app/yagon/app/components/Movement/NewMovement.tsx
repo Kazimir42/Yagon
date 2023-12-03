@@ -15,7 +15,7 @@ function NewMovement({product}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
-        createMovement(product.id, e.target.elements.title.value, e.target.elements.date.value, e.target.elements.location.value, e.target.elements.description.value).then(r => {
+        createMovement(product.id, e.target.elements.name.value, e.target.elements.date.value, e.target.elements.location.value, e.target.elements.description.value).then(r => {
             setIsLoading(false);
             setIsModalOpen(false);
             //todo handle status
@@ -43,17 +43,17 @@ function NewMovement({product}) {
                     {isLoading ? <div className={'absolute bg-black/30 top-0 left-0 rounded-2xl w-full h-full pt-48'}><Loader /></div> : ''}
                     <form className={'mt-4 grid grid-cols-2 gap-4'} onSubmit={handleSubmit}>
                         <div className={'col-span-2'}>
-                            <label htmlFor="title" className="block font-medium leading-6 text-gray-600">
-                                Title
+                            <label htmlFor="name" className="block font-medium leading-6 text-gray-600">
+                                Name
                             </label>
                             <div className="mt-1">
                                 <input
                                     required={true}
                                     type="text"
-                                    name="title"
-                                    id="title"
+                                    name="name"
+                                    id="name"
                                     className="block w-full rounded-xl border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
-                                    placeholder="Title"
+                                    placeholder="Name"
                                 />
                             </div>
                         </div>
