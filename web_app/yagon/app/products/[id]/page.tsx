@@ -5,7 +5,6 @@ import {useParams} from "next/navigation";
 import {useProduct} from "@/app/hooks/ProductHooks";
 import Loader from "@/app/components/Loader";
 import NoResult from "@/app/components/NoResult";
-import QRCode from "react-qr-code";
 import MovementTimeline from "@/app/components/Movement/MovementTimeline";
 import NewMovement from "@/app/components/Movement/NewMovement";
 import ProductCard from "@/app/components/Product/ProductCard";
@@ -18,21 +17,28 @@ interface ProductState {
     movements: any,
     numberOfMovements: number,
     description: string,
+    createdAt: number,
+    createdBy: string,
 }
 
 function Page() {
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState<ProductState | null>(null);
+    const [movements, setMovements] = useState([]);
     const params = useParams()
 
     const {contract, account} = useCrypto();
-    const {getProduct} = useProduct(contract, account);
+    const {getProduct, getMovements} = useProduct(contract, account);
 
     useEffect(() => {
         if (contract) {
             getProduct(params.id).then((product) => {
                 setProduct(product)
                 setIsLoading(false)
+                return product;
+            }).then((product) => {
+                // @ts-ignore
+                getMovements(product.id).then(movements => setMovements(movements))
             })
         }
     }, [contract]);
@@ -44,6 +50,7 @@ function Page() {
     if (!isLoading && !product?.id) {
         return <NoResult/>
     }
+
 
     return (
         <div>

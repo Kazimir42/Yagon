@@ -1,6 +1,6 @@
 export const useProduct = (contract: any, account: any) => {
 
-    // Product id for tests = 0x67623ba03618b99a90621767d57e073b2f00d69ce0d4f59b3f54ac222ad0432a
+    // Product id for tests = 0xfcbe76a50803a2ecd9d18f7af3ad75b34c3f70e8fd27c37d4721bff39d147161
     const getProduct = async (productId: string | string[]) => {
         try {
             let product = await contract.methods.getProduct(productId).call();
@@ -14,6 +14,16 @@ export const useProduct = (contract: any, account: any) => {
         }
     };
 
+    const getMovements = async (productId: string | string[]) => {
+        try {
+            let movements = await contract.methods.getMovements(productId).call();
+            console.log(movements)
+            return movements;
+        } catch (error) {
+            console.error('Error fetching product', error);
+        }
+    };
+
     const createMovement = async (productId: number, name: string, date: string, location: string, description: string) => {
         try {
             return await contract.methods.createMovement(productId, name, Date.parse(date), location, description).send({from: account});
@@ -22,7 +32,7 @@ export const useProduct = (contract: any, account: any) => {
         }
     };
 
-    return { getProduct, createMovement};
+    return { getProduct, createMovement, getMovements};
 };
 
 const parseProduct = (product: any) => {

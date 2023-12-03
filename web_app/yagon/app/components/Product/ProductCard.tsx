@@ -7,7 +7,7 @@ function ProductCard({product}) {
         <div id={'card'} className={'grid grid-cols-3 mt-8 gap-6 mx-auto p-6 bg-white rounded-xl shadow-xl w-full'}>
             <QRCode
                 className={'rounded w-full mt-0 h-auto'}
-                value={'test'}
+                value={product?.id}
                 viewBox={`0 0 256 256`}
             />
             <div className={'text-gray-600 col-span-2 flex flex-col gap-2'}>

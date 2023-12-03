@@ -1,19 +1,92 @@
-export const smartContractAddress = '0x77265F537bdFddD5A0A2eC0c70BC77F2CDd4f650';
+export const smartContractAddress = '0x6148D029314B93fA5C0EEd95fA25B32D0E3288Da';
 
 export const smartContractAbi = [
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_productId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_date",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_location",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      }
+    ],
+    "name": "createMovement",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_manufacturingLocation",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_manufacturingDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      }
+    ],
+    "name": "createProduct",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
   {
     "anonymous": false,
     "inputs": [
       {
         "indexed": false,
         "internalType": "bytes32",
-        "name": "productId",
+        "name": "id",
         "type": "bytes32"
       },
       {
         "indexed": false,
         "internalType": "bytes32",
-        "name": "movementId",
+        "name": "productId",
         "type": "bytes32"
       },
       {
@@ -109,73 +182,54 @@ export const smartContractAbi = [
     "inputs": [
       {
         "internalType": "bytes32",
-        "name": "_product_id",
+        "name": "_movementId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMovement",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "id",
         "type": "bytes32"
       },
       {
         "internalType": "string",
-        "name": "_name",
+        "name": "name",
         "type": "string"
       },
       {
         "internalType": "uint256",
-        "name": "_date",
+        "name": "date",
         "type": "uint256"
       },
       {
         "internalType": "string",
-        "name": "_location",
+        "name": "location",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "_description",
+        "name": "description",
         "type": "string"
-      }
-    ],
-    "name": "createMovement",
-    "outputs": [
+      },
       {
         "internalType": "bytes32",
-        "name": "",
+        "name": "productId",
         "type": "bytes32"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_name",
-        "type": "string"
       },
       {
-        "internalType": "string",
-        "name": "_manufacturingLocation",
-        "type": "string"
+        "internalType": "address",
+        "name": "createdBy",
+        "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "_manufacturingDate",
+        "name": "createdAt",
         "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_description",
-        "type": "string"
       }
     ],
-    "name": "createProduct",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -214,6 +268,11 @@ export const smartContractAbi = [
             "internalType": "string",
             "name": "description",
             "type": "string"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "productId",
+            "type": "bytes32"
           },
           {
             "internalType": "address",
@@ -270,8 +329,18 @@ export const smartContractAbi = [
         "type": "string"
       },
       {
+        "internalType": "bytes32[]",
+        "name": "movementIds",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "address",
+        "name": "createdBy",
+        "type": "address"
+      },
+      {
         "internalType": "uint256",
-        "name": "numberOfMovements",
+        "name": "createdAt",
         "type": "uint256"
       }
     ],

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Loader(props) {
+function Loader() {
     return (
         <>
             <svg aria-hidden="true"
