@@ -1,6 +1,6 @@
 import { Key } from "react"
 
-export default function MovementTimeline(props) {
+export default function MovementTimeline(props: { movements: { id: Key | null | undefined }[] }) {
 
     return (
         <div className="flow-root">
@@ -42,3 +42,4 @@ export default function MovementTimeline(props) {
         </div>
     )
 }
+

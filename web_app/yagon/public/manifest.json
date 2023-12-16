@@ -1,0 +1,16 @@
+{
+  "name": "Yagon | Supply chain tracking",
+  "short_name": "Yagon",
+  "description": "Supply chain tracking on blockchain with next.js pwa app",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#9333ea",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ]
+}
